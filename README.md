@@ -1,5 +1,7 @@
 # CityEngine Cloud MCP Server & Tools
 
+<!-- mcp-name: io.github.cgajs/cityengine-mcp -->
+
 Text-to-3D city buildings in one sentence: natural language → CGA rules → cloud engine → glTF/glb — plus demo browsing and quota lookup. Read-only compute endpoints only.
 
 This repository contains two complementary packages:

@@ -8,7 +8,7 @@ version = "0.1.0"
 description = "CityEngine Cloud MCP server: CGA parse / NL2CGA / text-to-3D for MCP clients (kimi code, codex, Claude Desktop)"
 readme = "README.md"
 requires-python = ">=3.10"
-license = { text = "Proprietary" }
+license = { text = "MIT" }
 dependencies = [
     "mcp>=1.9,<2",
     "httpx>=0.27",
