@@ -12,7 +12,6 @@
     {
       "registryType": "oci",
       "identifier": "ghcr.io/cgajs/cityengine-mcp:0.1.0",
-      "registryBaseUrl": "https://ghcr.io",
       "transport": {
         "type": "stdio"
       },
