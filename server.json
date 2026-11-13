@@ -1,0 +1,37 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.cgajs/cityengine-mcp",
+  "title": "CityEngine Cloud",
+  "description": "Text-to-3D city buildings: natural language to CGA rules to rendered glTF models.",
+  "version": "0.1.0",
+  "repository": {
+    "url": "https://github.com/cgajs/cityengine-mcp",
+    "source": "github"
+  },
+  "packages": [
+    {
+      "registryType": "oci",
+      "identifier": "ghcr.io/cgajs/cityengine-mcp:0.1.0",
+      "registryBaseUrl": "https://ghcr.io",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "CITYENGINE_API_KEY",
+          "description": "API key for CityEngine Cloud (get one at https://www.cityengine.cn/plugins.html)",
+          "isRequired": true,
+          "format": "string",
+          "isSecret": true
+        },
+        {
+          "name": "CITYENGINE_GATEWAY_BASE",
+          "description": "Override gateway base URL (default https://api.cityengine.cn)",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}
