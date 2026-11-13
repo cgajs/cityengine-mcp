@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "cityengine": {
+      "command": "python3",
+      "args": ["-m", "cityengine_mcp.server"],
+      "env": {
+        "PYTHONPATH": "/tmp/codex-12h-0922/kimi/ce-mcp-1113-work",
+        "CITYENGINE_API_KEY": "cvk_在此填入你的插件Key",
+        "CITYENGINE_OUTPUT_DIR": "./cityengine_mcp_output"
+      }
+    }
+  }
+}

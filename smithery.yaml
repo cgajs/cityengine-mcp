@@ -1,0 +1,9 @@
+# Smithery 发布配置骨架（需公开 GitHub 仓库后生效）
+startup:
+  type: stdio
+  command: python
+  args: ["-m", "cityengine_mcp.server"]
+  env:
+    CITYENGINE_API_KEY:
+      description: CityEngine 插件 API Key（cvk_ 前缀，https://www.cityengine.cn 用户中心签发）
+      required: true

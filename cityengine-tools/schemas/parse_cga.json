@@ -1,0 +1,47 @@
+{
+  "type": "function",
+  "function": {
+    "name": "parse_cga",
+    "description": "用 CityEngine 引擎解析 CGA 规则源码，生成三维模型（glTF/glb）。异步 job，本适配层自动轮询至完成。",
+    "parameters": {
+      "type": "object",
+      "required": ["cga_source"],
+      "properties": {
+        "cga_source": {
+          "type": "string",
+          "maxLength": 200000,
+          "description": "CGA 规则源码全文（手写或 generate_cga 的产物）"
+        },
+        "attributes": {
+          "type": "object",
+          "description": "CGA attr 覆盖，如 {\"height\": 30}；键必须在规则的 attr 声明内"
+        },
+        "initial_shape": {
+          "type": "object",
+          "required": ["pts"],
+          "description": "初始地块多边形，米制；缺省用 30m x 20m 调试地块",
+          "properties": {
+            "type": { "type": "string", "enum": ["Polygon"], "default": "Polygon" },
+            "pts": {
+              "type": "array",
+              "minItems": 3,
+              "description": "世界坐标 [x, z] 序列，米制",
+              "items": {
+                "type": "array",
+                "items": { "type": "number" },
+                "minItems": 2,
+                "maxItems": 2
+              }
+            },
+            "centerX": { "type": "number" },
+            "centerZ": { "type": "number" }
+          }
+        },
+        "seed": {
+          "type": "integer",
+          "description": "随机种子，固定后可复现结果"
+        }
+      }
+    }
+  }
+}

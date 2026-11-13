@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cityengine-mcp"
+version = "0.1.0"
+description = "CityEngine Cloud MCP server: CGA parse / NL2CGA / text-to-3D for MCP clients (kimi code, codex, Claude Desktop)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "Proprietary" }
+dependencies = [
+    "mcp>=1.9,<2",
+    "httpx>=0.27",
+]
+
+[project.scripts]
+cityengine-mcp = "cityengine_mcp.server:main"
+
+[tool.setuptools.packages.find]
+include = ["cityengine_mcp*"]

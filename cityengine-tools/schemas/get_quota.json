@@ -1,0 +1,11 @@
+{
+  "type": "function",
+  "function": {
+    "name": "get_quota",
+    "description": "查询当前 CityEngine API key 的套餐、额度用量（generate/NL2CGA）与限流参数。",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  }
+}

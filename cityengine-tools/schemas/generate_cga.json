@@ -1,0 +1,26 @@
+{
+  "type": "function",
+  "function": {
+    "name": "generate_cga",
+    "description": "自然语言一句话 → NL2CGA → CGA 规则源码（不渲染，同步返回）。两种模式二选一：text 直接描述；或 base_cga + instruction 在既有 CGA 上修改。LLM 兜底模式最长约 90s。",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "自然语言描述，如「三层小楼，坡屋顶，底层商铺」。与 base_cga+instruction 二选一"
+        },
+        "base_cga": {
+          "type": "string",
+          "description": "上一次拿到的 cga_source 原文（须与 instruction 同时提供）"
+        },
+        "instruction": {
+          "type": "string",
+          "maxLength": 2000,
+          "description": "修改指令，如「把立面材质改成红砖」（须与 base_cga 同时提供）"
+        }
+      }
+    }
+  }
+}

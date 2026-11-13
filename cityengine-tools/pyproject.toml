@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cityengine-tools"
+version = "0.1.0"
+description = "CityEngine Cloud tools for OpenAI-compatible function calling (deepseek/qwen/glm/gpt etc.)"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "Proprietary" }
+dependencies = ["httpx>=0.24"]
+
+[project.urls]
+Homepage = "https://www.cityengine.cn"
+API = "https://api.cityengine.cn"
+
+[tool.setuptools]
+packages = ["cityengine_tools"]
+
+[tool.setuptools.package-data]
+cityengine_tools = ["tools.json"]

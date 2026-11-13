@@ -1,0 +1,11 @@
+{
+  "type": "function",
+  "function": {
+    "name": "list_demos",
+    "description": "列出 CityEngine 官网首页的 demo 案例（id、名称、引擎、来源日期、属性个数）。返回条目可传给 get_demo 查看属性面板细节。",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  }
+}

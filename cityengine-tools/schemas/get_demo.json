@@ -1,0 +1,17 @@
+{
+  "type": "function",
+  "function": {
+    "name": "get_demo",
+    "description": "查看某个官网 demo 案例的详情：属性面板定义、材质数、节点数、引擎耗时。demo 的 CGA 源码属付费内容，本工具返回公开快照信息，适合做参数设计参考。",
+    "parameters": {
+      "type": "object",
+      "required": ["demo_id"],
+      "properties": {
+        "demo_id": {
+          "type": "string",
+          "description": "list_demos 返回的 id，如 building-glass-20260928"
+        }
+      }
+    }
+  }
+}

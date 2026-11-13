@@ -1,0 +1,17 @@
+{
+  "$schema": "https://glama.ai/mcp/schemas/server.json",
+  "name": "cityengine-mcp",
+  "description": "Text-to-3D city buildings in one sentence: NL → CGA rules → cloud engine → glTF/glb, plus demo browsing and quota lookup. Read-only compute endpoints only.",
+  "repository": "https://github.com/cityengine-cn/cityengine-mcp",
+  "homepage": "https://www.cityengine.cn/plugins.html",
+  "runtime": "python",
+  "maintainers": ["cityengine.cn"],
+  "categories": ["3d", "generative-ai", "developer-tools", "design"],
+  "tags": ["cga", "procedural-modeling", "3d", "gltf", "cityengine", "text-to-3d", "gis", "urban-planning"],
+  "env": {
+    "CITYENGINE_API_KEY": {
+      "description": "CityEngine plugin API key (cvk_ prefix), self-issued at https://www.cityengine.cn user center",
+      "required": true
+    }
+  }
+}

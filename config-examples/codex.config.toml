@@ -1,0 +1,11 @@
+# Codex CLI 配置示例：追加到 ~/.codex/config.toml
+# 注意：Codex 的 env 表只接受字符串值。
+
+[mcp_servers.cityengine]
+command = "python3"
+args = ["-m", "cityengine_mcp.server"]
+
+[mcp_servers.cityengine.env]
+PYTHONPATH = "/tmp/codex-12h-0922/kimi/ce-mcp-1113-work"
+CITYENGINE_API_KEY = "cvk_在此填入你的插件Key"
+CITYENGINE_OUTPUT_DIR = "./cityengine_mcp_output"

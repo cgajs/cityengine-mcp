@@ -1,0 +1,201 @@
+[
+  {
+    "type": "function",
+    "function": {
+      "name": "generate_cga",
+      "description": "自然语言一句话 → NL2CGA → CGA 规则源码（不渲染，同步返回）。两种模式二选一：text 直接描述；或 base_cga + instruction 在既有 CGA 上修改。LLM 兜底模式最长约 90s。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "自然语言描述，如「三层小楼，坡屋顶，底层商铺」。与 base_cga+instruction 二选一"
+          },
+          "base_cga": {
+            "type": "string",
+            "description": "上一次拿到的 cga_source 原文（须与 instruction 同时提供）"
+          },
+          "instruction": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "修改指令，如「把立面材质改成红砖」（须与 base_cga 同时提供）"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "parse_cga",
+      "description": "用 CityEngine 引擎解析 CGA 规则源码，生成三维模型（glTF/glb）。异步 job，本适配层自动轮询至完成。",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "cga_source"
+        ],
+        "properties": {
+          "cga_source": {
+            "type": "string",
+            "maxLength": 200000,
+            "description": "CGA 规则源码全文（手写或 generate_cga 的产物）"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "CGA attr 覆盖，如 {\"height\": 30}；键必须在规则的 attr 声明内"
+          },
+          "initial_shape": {
+            "type": "object",
+            "required": [
+              "pts"
+            ],
+            "description": "初始地块多边形，米制；缺省用 30m x 20m 调试地块",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Polygon"
+                ],
+                "default": "Polygon"
+              },
+              "pts": {
+                "type": "array",
+                "minItems": 3,
+                "description": "世界坐标 [x, z] 序列，米制",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              },
+              "centerX": {
+                "type": "number"
+              },
+              "centerZ": {
+                "type": "number"
+              }
+            }
+          },
+          "seed": {
+            "type": "integer",
+            "description": "随机种子，固定后可复现结果"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "generate_model",
+      "description": "自然语言一句话 → 直接生成三维模型（NL2CGA + 引擎解析一键串联，glTF/glb）。两种模式二选一：text 直接描述；或 base_cga + instruction 二次生成。异步 job，本适配层自动轮询至完成。",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "自然语言描述，如「生成一栋 12 层现代玻璃幕墙办公楼」。与 base_cga+instruction 二选一"
+          },
+          "base_cga": {
+            "type": "string",
+            "description": "上一次拿到的 cga_source 原文（须与 instruction 同时提供）"
+          },
+          "instruction": {
+            "type": "string",
+            "maxLength": 2000,
+            "description": "修改指令（须与 base_cga 同时提供）"
+          },
+          "attributes": {
+            "type": "object",
+            "description": "CGA attr 覆盖，如 {\"height\": 30}；键必须在规则的 attr 声明内"
+          },
+          "initial_shape": {
+            "type": "object",
+            "required": [
+              "pts"
+            ],
+            "description": "初始地块多边形，米制；缺省用 30m x 20m 调试地块",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": [
+                  "Polygon"
+                ],
+                "default": "Polygon"
+              },
+              "pts": {
+                "type": "array",
+                "minItems": 3,
+                "description": "世界坐标 [x, z] 序列，米制",
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "number"
+                  },
+                  "minItems": 2,
+                  "maxItems": 2
+                }
+              },
+              "centerX": {
+                "type": "number"
+              },
+              "centerZ": {
+                "type": "number"
+              }
+            }
+          },
+          "seed": {
+            "type": "integer",
+            "description": "随机种子，固定后可复现结果"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "list_demos",
+      "description": "列出 CityEngine 官网首页的 demo 案例（id、名称、引擎、来源日期、属性个数）。返回条目可传给 get_demo 查看属性面板细节。",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_demo",
+      "description": "查看某个官网 demo 案例的详情：属性面板定义、材质数、节点数、引擎耗时。demo 的 CGA 源码属付费内容，本工具返回公开快照信息，适合做参数设计参考。",
+      "parameters": {
+        "type": "object",
+        "required": [
+          "demo_id"
+        ],
+        "properties": {
+          "demo_id": {
+            "type": "string",
+            "description": "list_demos 返回的 id，如 building-glass-20260928"
+          }
+        }
+      }
+    }
+  },
+  {
+    "type": "function",
+    "function": {
+      "name": "get_quota",
+      "description": "查询当前 CityEngine API key 的套餐、额度用量（generate/NL2CGA）与限流参数。",
+      "parameters": {
+        "type": "object",
+        "properties": {}
+      }
+    }
+  }
+]
